@@ -1,0 +1,13 @@
+<?php 
+	$url = $this->GetIframeUrl();
+	switch($url){
+		case 'paid':
+			print 'Order payment received.  Place Order to complete.'; break;
+		case 'disabled':
+			print 'Please click Place Order to continue to BIPS.'; break;
+		case false:
+			print 'Error creating invoice.  Please try again or try another payment solution.'; break;
+		default:
+			print '<iframe src="' . $url . '" style="width: 100%; height: 1200px; border: 0px;"> </iframe>'; break;
+	}
+?>

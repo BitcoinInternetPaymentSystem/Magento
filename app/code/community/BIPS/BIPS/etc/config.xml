@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<config>
+	<frontend>
+        <routers>
+            <BIPS_callback>
+                <use>standard</use>
+                <args>
+                    <module>BIPS_BIPS</module>
+                    <frontName>BIPS_callback</frontName>
+                </args>
+            </BIPS_callback>
+        </routers>
+        <layout>			
+            <updates>
+                <BIPS>
+                    <file>BIPS.xml</file>
+                </BIPS>
+            </updates>
+        </layout>
+    </frontend>
+
+	<modules>
+	   <BIPS_BIPS>
+			<!-- for database updates -->
+		  <version>1.0.0</version>
+	   </BIPS_BIPS>
+	</modules>
+ 
+	<global>
+		<blocks>
+			<BIPS>
+				<class>BIPS_BIPS_Block</class>
+			</BIPS>
+		</blocks>
+
+		<models>
+			<BIPS>
+				<class>BIPS_BIPS_Model</class>
+				<resourceModel>BIPS_resource</resourceModel>
+			</BIPS>
+			<BIPS_resource>
+				<class>BIPS_BIPS_Model_Resource</class>
+				<entities>
+					<ipn>
+						<table>BIPS_ipns</table>
+					</ipn>
+				</entities>
+			</BIPS_resource>
+		</models>
+	 
+		<resources>
+			<BIPS_setup> <!-- keep this uppercase or you'll get duplicate errors -->
+				<setup>
+					<!-- which module to look for install/upgrade files in -->
+					<module>BIPS_BIPS</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</BIPS_setup>
+			<BIPS_write>
+				<connection>
+				  <use>core_write</use>
+				</connection>
+			</BIPS_write>
+			<BIPS_read>
+			   <connection>
+				<use>core_read</use>
+			  </connection>
+			</BIPS_read>
+		</resources>
+	</global> 
+	
+	<default>
+		<payment>
+			<BIPS>
+				<active>1</active>
+				<model>BIPS/paymentMethod</model>
+				<title>BIPS</title>
+				<payment_action>authorize</payment_action>
+			</BIPS>
+		 </payment>
+	</default>
+</config>

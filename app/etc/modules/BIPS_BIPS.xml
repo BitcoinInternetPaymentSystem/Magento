@@ -1,0 +1,11 @@
+<config>
+	<modules>
+		<BIPS_BIPS>
+			<active>true</active>
+			<codePool>community</codePool>
+			<depends>
+				<Mage_Payment />
+			</depends>
+		</BIPS_BIPS>
+	</modules>
+</config>
