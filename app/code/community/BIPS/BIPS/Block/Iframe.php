@@ -43,7 +43,7 @@
 			$redirect = curl_exec($ch);
 			curl_close($ch);
 
-			return $redirect . '?view=iframe';
+			return $redirect . '/iframe';
 		}
 	}
 ?>
