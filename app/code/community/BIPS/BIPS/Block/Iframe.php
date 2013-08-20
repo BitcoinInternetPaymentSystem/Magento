@@ -10,6 +10,10 @@
 		// create an invoice and return the url so that iframe.phtml can display it
 		public function GetIframeUrl()
 		{
+			if (Mage::registry('customer_save_observer_executed')){
+				return $this; //this method has already been executed once in this request (see comment below)
+			}			
+			
 			if (!Mage::getStoreConfig('payment/BIPS/onsite'))
 				return 'disabled';
 
@@ -42,6 +46,8 @@
 			CURLOPT_HTTPAUTH => CURLAUTH_BASIC));
 			$redirect = curl_exec($ch);
 			curl_close($ch);
+			
+			Mage::register('customer_save_observer_executed',true); 
 
 			return $redirect . '/iframe';
 		}
