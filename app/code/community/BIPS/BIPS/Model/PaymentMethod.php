@@ -121,6 +121,7 @@
 			Mage::getSingleton('core/session', array('name'=>'frontend'));
 			$session = Mage::getSingleton('checkout/session');
 
+/*
 			$item_name = '';
 
 			foreach ($session->getQuote()->getAllItems() as $item)
@@ -129,12 +130,13 @@
 				$item_name .= $item->getName() . ', ';
 				$item_name .= 'Qty:' . $item->getQty() . ' - ';
 			}
+*/
 
 			$ch = curl_init();
 			curl_setopt_array($ch, array(
 			CURLOPT_URL => 'https://bips.me/api/v1/invoice',
 			CURLOPT_USERPWD => Mage::getStoreConfig('payment/BIPS/BIPS_apikey'),
-			CURLOPT_POSTFIELDS => 'price=' . number_format($amount, 2, '.', '') . '&currency=' . $order->getBaseCurrencyCode() . '&item=' . $item_name . '&custom=' . json_encode(array('orderId' => $orderId, 'returnurl' => rawurlencode(Mage::getUrl('customer/account')))),
+			CURLOPT_POSTFIELDS => 'price=' . number_format($amount, 2, '.', '') . '&currency=' . $order->getBaseCurrencyCode() . '&item=' . $orderId . '&custom=' . json_encode(array('orderId' => $orderId, 'returnurl' => rawurlencode(Mage::getUrl('customer/account')))),
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_SSL_VERIFYHOST => 0,
 			CURLOPT_SSL_VERIFYPEER => 0,
